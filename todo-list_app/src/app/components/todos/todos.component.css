@@ -1,12 +1,8 @@
 .todo {
 	display: flex;
-	padding: 10px 15px;
+	padding: 13px 15px;
 	background-color: #FFF;
 	border-bottom: 1px solid #DDD;
-}
-
-.todo:nth-child(even) {
-	background-color: #EEE;
 }
 
 .todo:last-of-type {
@@ -54,3 +50,6 @@
 	font-size: 18px;
 	font-weight: 700;
 }
+.completed-row {
+	background-color: lightgreen;
+  }  

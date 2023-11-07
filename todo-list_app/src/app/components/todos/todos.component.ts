@@ -18,6 +18,26 @@ export class TodosComponent {
   inputTodo = '';
   errorMessage: string = '';
 
+  constructor() {
+    // Initialize your todos array in the constructor
+    this.todos = [
+      {
+        content: 'Deactivate my account',
+        completed: false,
+        postponed: false,
+        editing: false,
+        completedClass: ''
+      },
+      {
+        content: 'Clean my car after the work',
+        completed: false,
+        postponed: false,
+        editing: false,
+        completedClass: ''
+      }
+    ];
+  }
+
   toggleDone(id: number) {
     this.todos[id].completed = !this.todos[id].completed;
     this.todos[id].completedClass = this.todos[id].completed ? 'completed' : '';
