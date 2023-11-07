@@ -19,7 +19,7 @@ export class TodosComponent {
   errorMessage: string = '';
 
   constructor() {
-    // Initialize your todos array in the constructor
+    // Initializing the todos array in the constructor
     this.todos = [
       {
         content: 'Deactivate my account',
@@ -52,7 +52,7 @@ export class TodosComponent {
   }
 
   postponeTodo(id: number) {
-    // Toggle the postponed state of the todo
+    // Toggling the postponed state of the todo
     this.todos[id].postponed = !this.todos[id].postponed;
   }
 
