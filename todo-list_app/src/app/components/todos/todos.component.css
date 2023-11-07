@@ -38,12 +38,11 @@
 	width: 100%;
 	max-width: 200px;
 	appearance: none;
-	border: none;
 	outline: none;
 	background: none;
 
-	background-color: #6048fe;
-	color: #FFF;
+	background-color: #d2d1dc;
+	color: #171515;
 	margin: 15px auto;
 
 	padding: 10px 15px;

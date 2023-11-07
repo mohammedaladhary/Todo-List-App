@@ -62,7 +62,7 @@ export class TodosComponent {
 
   restorePostponed() {
     // Set the postponed state to false for all todos
-    this.todos.forEach((todo) => (todo.postponed = false));
+    this.todos.forEach((todo) => (todo.postponed = true));
   }
 
   editTodo(id: number) {
