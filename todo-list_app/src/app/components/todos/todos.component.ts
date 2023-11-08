@@ -8,6 +8,7 @@ import { Todo } from 'src/app/models/todos.model';
 })
 export class TodosComponent {
   todos: Todo[] = [];
+  postponedTodos: Todo[] = [];
   inputTodo = '';
   errorMessage: string = '';
 
@@ -27,27 +28,33 @@ export class TodosComponent {
     this.todos[id].completedClass = this.todos[id].completed ? 'completed' : '';
   }
 
-  deleteTodo(id: number) {
-    this.todos.splice(id, 1);
-  }
 
   markAsDone(id: number) {
     this.toggleDone(id);
   }
 
+  deleteTodo(id: number) {
+    this.todos.splice(id, 1);
+  }
+
   postponeTodo(id: number) {
-    // Toggling the postponed state of the todo
-    this.todos[id].postponed = !this.todos[id].postponed;
+    const todoToPostpone = this.todos[id];
+    this.todos.splice(id, 1);
+    this.postponedTodos.push(todoToPostpone);
   }
 
   cleanCompleted() {
     this.todos = this.todos.filter((todo) => !todo.completed);
   }
 
-  restorePostponed() {
-    // Set the postponed state to false for all todos
-    this.todos.forEach((todo) => (todo.postponed = true));
+  restorePostponed(id: number) {
+    // Move the postponed todo back to the main todos array
+    const todoToRestore = this.postponedTodos[id];
+    this.postponedTodos.splice(id, 1); // Remove it from the postponedTodos array
+    this.todos.push(todoToRestore); // Add it to the main todos array
   }
+  
+  
 
   editTodo(id: number) {
     this.todos[id].editing = true;
@@ -73,13 +80,13 @@ export class TodosComponent {
   addTodo() {
     const newTodoContent = this.inputTodo.trim();
   
-    if (newTodoContent === '') {
-      // Do not set an error message, and do nothing
-      return;
-    } else if (this.todos.some((todo) => todo.content === newTodoContent)) {
-      // Do not set an error message, and do nothing
-      return;
-    } else {
+    if(newTodoContent === '') {
+      this.errorMessage = 'Please enter a to-do name.';
+    } 
+    else if (this.todos.some((todo) => todo.content === newTodoContent)) {
+      this.errorMessage = 'A to-do with the same name already exists.';
+    }
+    else {
       this.todos.push({
         content: newTodoContent,
         completed: false,
@@ -90,7 +97,6 @@ export class TodosComponent {
           throw new Error('Function not implemented.');
         }
       });
-  
       this.inputTodo = '';
     }
   }

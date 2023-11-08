@@ -10,7 +10,9 @@
 		<input type="submit" value="Add Todo" class="todo-submit" [disabled]="isDisabled()" />
 	  </form>	
   
-	<div *ngFor="let todo of todos; let i = index" class="todo" [ngClass]="{ 'done': todo.completed, 'completed-row': todo.completed, 'postponed-todo': todo.postponed  }">
+	  <!-- Display active todos -->
+	  <h2>Active Todos</h2>
+	  <div *ngFor="let todo of todos; let i = index" class="todo" [ngClass]="{ 'done': todo.completed, 'completed-row': todo.completed, 'postponed-todo': todo.postponed }">
 		<div class="id">{{ i + 1 }}</div>
 		<div class="content" *ngIf="!todo.editing">{{ todo.content }}</div>
 		<input *ngIf="todo.editing" [(ngModel)]="todo.content" (blur)="saveTodo(i)" (keydown.enter)="saveTodo(i)" (keydown.esc)="cancelEdit(i)" />
@@ -19,8 +21,16 @@
 		<button class="delete" (click)="deleteTodo(i)">Remove</button>
 		<button class="edit" (click)="editTodo(i)">Edit</button>
 	  </div>
-  
-	<button class="clean-button" (click)="cleanCompleted()" *ngIf="todos.length > 0">Clear</button>
-	<button class="restore-button" (click)="restorePostponed()" *ngIf="todos.length > 0">Restore</button>
-	<div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+	
+	  <button class="clean-button" (click)="cleanCompleted()" *ngIf="todos.length > 0">Clear</button>
+	  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+	
+	  <h2>Postponed Todos</h2>
+	  <!-- Display postponed todos -->
+	  <div *ngFor="let todo of postponedTodos; let i = index" class="todo" [ngClass]="{ 'done': todo.completed, 'completed-row': todo.completed, 'postponed-todo': todo.postponed }">
+		<div class="id">{{ i + 1 }}</div>
+		<div class="content">{{ todo.content }}</div>
+		<button class="postpone" (click)="restorePostponed(i)">Restore</button>
+	  </div>
+
   </div>  
