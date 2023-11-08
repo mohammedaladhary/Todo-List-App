@@ -3,6 +3,7 @@
 	padding: 13px 15px;
 	background-color: #FFF;
 	border-bottom: 1px solid #DDD;
+	gap: 8px;
 }
 
 .todo:last-of-type {
@@ -40,11 +41,9 @@
 	appearance: none;
 	outline: none;
 	background: none;
-
 	background-color: #d2d1dc;
 	color: #171515;
 	margin: 15px auto;
-
 	padding: 10px 15px;
 	font-size: 18px;
 	font-weight: 700;

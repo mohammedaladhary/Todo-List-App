@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-
-interface Todo {
-  content: string;
-  completed: boolean;
-  postponed: boolean;
-  editing: boolean;
-  completedClass?: string;
-}
+import { Todo } from 'src/app/models/todos.model';
 
 @Component({
   selector: 'app-todos',
@@ -19,23 +12,14 @@ export class TodosComponent {
   errorMessage: string = '';
 
   constructor() {
-    // Initializing the todos array in the constructor
     this.todos = [
-      {
-        content: 'Deactivate my account',
-        completed: false,
-        postponed: false,
-        editing: false,
-        completedClass: ''
-      },
-      {
-        content: 'Clean my car after the work',
-        completed: false,
-        postponed: false,
-        editing: false,
-        completedClass: ''
-      }
+      new Todo('Deactivate my account', false, false, false, ''),
+      new Todo('Clean my car after work', false, false, false, '')
     ];
+  }
+
+  isDisabled(): boolean {
+    return this.inputTodo.trim() === '';
   }
 
   toggleDone(id: number) {
@@ -90,20 +74,25 @@ export class TodosComponent {
     const newTodoContent = this.inputTodo.trim();
   
     if (newTodoContent === '') {
-      this.errorMessage = 'Please enter a to-do name.';
+      // Do not set an error message, and do nothing
+      return;
     } else if (this.todos.some((todo) => todo.content === newTodoContent)) {
-      this.errorMessage = 'A to-do with the same name already exists.';
+      // Do not set an error message, and do nothing
+      return;
     } else {
       this.todos.push({
         content: newTodoContent,
         completed: false,
         postponed: false,
         editing: false,
-        completedClass: ''
+        completedClass: '',
+        isDisabled: function (): boolean {
+          throw new Error('Function not implemented.');
+        }
       });
   
       this.inputTodo = '';
-      this.errorMessage = ''; // Clear the error message
     }
-  }  
+  }
+    
 }

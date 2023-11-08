@@ -1,14 +1,14 @@
 <div class="todos">
 	<form (submit)="addTodo()">
-	  <input
-		type="text"
-		name="inputTodo"
-		placeholder="Enter todo..."
-		class="todo-input"
-		[(ngModel)]="inputTodo"
-	  />
-	  <input type="submit" value="Add Todo" class="todo-submit" />
-	</form>
+		<input
+		  type="text"
+		  name="inputTodo"
+		  placeholder="Enter todo..."
+		  class="todo-input"
+		  [(ngModel)]="inputTodo"
+		/>
+		<input type="submit" value="Add Todo" class="todo-submit" [disabled]="isDisabled()" />
+	  </form>	
   
 	<div *ngFor="let todo of todos; let i = index" class="todo" [ngClass]="{ 'done': todo.completed, 'completed-row': todo.completed, 'postponed-todo': todo.postponed  }">
 		<div class="id">{{ i + 1 }}</div>
